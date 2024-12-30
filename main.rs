@@ -1,3 +1,4 @@
+use std::convert::TryInto;
 fn main(){
     let mut x = 5;
     let array : [u8; 5] = [1, 2, 3, 4, 5];
@@ -5,7 +6,9 @@ fn main(){
     let can_window = WindowsCan{};
     can_window.send(1, &array);
 }
-
+pub struct IsoTpSender {
+    can_interface: Box<dyn CanInterface>, // Interface to send CAN frames
+}
 
 pub trait CanInterface {
     /// CAN 메시지 전송
